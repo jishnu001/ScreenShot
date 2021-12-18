@@ -4,7 +4,7 @@
 #include <QPixmap>
 #include <QScreen>
 #include <iostream>
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
     QGuiApplication a(argc, argv);
 
@@ -23,24 +23,30 @@ int main(int argc, char* argv[])
     QString fileName = "shot.png";
     int screenNumber = 0;
 
-    if (parser.isSet(fileNameOption)) {
+    if (parser.isSet(fileNameOption))
+    {
         fileName = parser.value(fileNameOption);
     }
-    if (parser.isSet(screenNumberOption)) {
+    if (parser.isSet(screenNumberOption))
+    {
         screenNumber = parser.value(screenNumberOption).toInt();
     }
 
-    QScreen* screen = QGuiApplication::primaryScreen();
+    QScreen *screen = QGuiApplication::primaryScreen();
 
-    if (!screen) {
+    if (!screen)
+    {
         std::cerr << "Error getting screenshot";
         return 0;
     }
 
-    auto originalPixmap = screen->grabWindow(screenNumber);
-    if (!originalPixmap.save(fileName)) {
-        std::cerr << "Error saving to file: "<< fileName.toStdString();
-    } else {
+    const auto& originalPixmap = screen->grabWindow(screenNumber);
+    if (!originalPixmap.save(fileName))
+    {
+        std::cerr << "Error saving to file: " << fileName.toStdString();
+    }
+    else
+    {
         std::cerr << "Saved screenshot to: " << fileName.toStdString();
     }
     return 0;
